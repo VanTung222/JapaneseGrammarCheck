@@ -1,0 +1,4 @@
+com\example\grammar\GrammarCheckServlet.class
+com\mycompany\japanesegrammarcheckpro\JakartaRestConfiguration.class
+com\mycompany\japanesegrammarcheckpro\resources\JakartaEE10Resource.class
+com\example\grammar\filter\UTF8Filter.class
