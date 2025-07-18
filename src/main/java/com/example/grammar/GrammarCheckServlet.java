@@ -76,12 +76,13 @@ public class GrammarCheckServlet extends HttpServlet {
         var parts = message.putArray("parts");
         ObjectNode partNode = mapper.createObjectNode();
         partNode.put("text",
-            "Tôi là người Việt, đang học tiếng Nhật.\n"
-            + "Bạn hãy giúp kiểm tra câu tiếng Nhật sau có đúng không.\n"
-            + "Nếu sai, hãy:\n"
-            + "- Trả về câu đã được sửa ở dòng đầu tiên.\n"
-            + "- Sau đó, ở các dòng tiếp theo, giải thích ngắn gọn các lỗi sai và cách sửa. (ví dụ: わ → は)\n\n"
-            + "Câu:「" + userText + "」"
+                "Tôi là người Việt, đang học tiếng Nhật.\n"
+                + "Với câu sau đây, nếu có sai ngữ pháp, hãy sửa lại thành đúng.\n"
+                + "Yêu cầu:\n"
+                + "- Dòng đầu tiên: hiển thị lại câu đúng.\n"
+                + "- Dòng thứ hai trở đi: liệt kê các thay đổi theo định dạng đơn giản: sai → đúng.\n"
+                + "Không cần giải thích dài dòng.\n"
+                + "Câu:「" + userText + "」"
         );
         parts.add(partNode);
         contents.add(message);
