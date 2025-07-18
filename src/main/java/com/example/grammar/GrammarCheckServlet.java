@@ -49,7 +49,7 @@ public class GrammarCheckServlet extends HttpServlet {
         }
 
         if (GEMINI_API_KEY == null || GEMINI_API_KEY.trim().isEmpty()) {
-            req.setAttribute("error", "API key Gemini chưa được cấu hình.");
+            req.setAttribute("error", "chưa được cấu hình.");
             req.getRequestDispatcher("/index.jsp").forward(req, resp);
             return;
         }
@@ -59,8 +59,8 @@ public class GrammarCheckServlet extends HttpServlet {
             req.setAttribute("correctedText", result);
             req.setAttribute("message", "Kết quả kiểm tra:");
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Gemini API error", e);
-            req.setAttribute("error", "Lỗi từ Gemini API: " + e.getMessage());
+            logger.log(Level.SEVERE, "error", e);
+            req.setAttribute("error", "Lỗi: " + e.getMessage());
         }
 
         req.getRequestDispatcher("/index.jsp").forward(req, resp);
@@ -93,16 +93,16 @@ public class GrammarCheckServlet extends HttpServlet {
                 .build();
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
-        logger.info("Gemini API Status: " + response.statusCode());
-        logger.info("Gemini Response: " + response.body());
+        logger.info("Status: " + response.statusCode());
+        logger.info("Response: " + response.body());
 
         if (response.statusCode() != 200) {
-            throw new RuntimeException("Lỗi Gemini API: " + response.body());
+            throw new RuntimeException("Lỗi: " + response.body());
         }
 
         JsonNode root = mapper.readTree(response.body());
         if (!root.has("candidates") || root.path("candidates").isEmpty()) {
-            throw new RuntimeException("Phản hồi từ Gemini không hợp lệ.");
+            throw new RuntimeException("Phản hồi không hợp lệ.");
         }
 
         return root.path("candidates").get(0).path("content").path("parts").get(0).path("text").asText();

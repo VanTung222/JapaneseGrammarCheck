@@ -52,7 +52,7 @@
     </style>
 </head>
 <body>
-    <h1>Trình kiểm tra ngữ pháp tiếng Nhật (Gemini)</h1>
+    <h1>Trình kiểm tra ngữ pháp tiếng Nhật</h1>
     <form method="post" action="checkGrammar">
         <label for="text">Nhập câu tiếng Nhật:</label>
         <textarea name="text" placeholder="Nhập câu cần kiểm tra..."></textarea>
